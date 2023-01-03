@@ -11,13 +11,11 @@ import User from "./User";
 interface PostAttributes {
   id: number;
   user_id: number;
-  date_posted: Date;
   content: string;
   likes: number;
 }
 
-interface PostCreationAttributes
-  extends Optional<PostAttributes, "id" | "date_posted"> {}
+interface PostCreationAttributes extends Optional<PostAttributes, "id"> {}
 
 @Table
 class Post
@@ -32,8 +30,6 @@ class Post
   @ForeignKey(() => User)
   @Column
   user_id: number;
-  @Column
-  date_posted: Date;
   @Column
   content: string;
   @Column({

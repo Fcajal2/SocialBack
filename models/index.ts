@@ -9,7 +9,7 @@ const sequelize = new Sequelize(
   config.local.password,
   {
     host: config.local.host,
-    dialect: "mysql",
+    dialect: config.local.dialect ?? "mysql",
     port: config.local.port,
     models: [Post, User],
   } as SequelizeOptions
