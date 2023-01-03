@@ -1,9 +1,8 @@
-import { Optional } from "sequelize";
+import { Optional, UUIDV4 } from "sequelize";
 import {
   Column,
   HasMany,
   Model,
-  PrimaryKey,
   Table,
 } from "sequelize-typescript";
 import Post from "./Post";
@@ -24,8 +23,10 @@ class User
   extends Model<UserAttributes, UserCreationAttributes>
   implements UserAttributes
 {
-  @PrimaryKey
-  @Column
+  @Column({
+    primaryKey: true,
+    defaultValue: UUIDV4,
+  })
   id: number;
   @Column
   username: string;

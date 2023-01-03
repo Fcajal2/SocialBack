@@ -1,10 +1,9 @@
-import { Optional } from "sequelize";
+import { Optional, UUIDV4 } from "sequelize";
 import {
   BelongsTo,
   Column,
   ForeignKey,
   Model,
-  PrimaryKey,
   Table,
 } from "sequelize-typescript";
 import User from "./User";
@@ -14,7 +13,7 @@ interface PostAttributes {
   user_id: number;
   date_posted: Date;
   content: string;
-  //likes: number; <-- dejar para despues, averiguar como
+  likes: number;
 }
 
 interface PostCreationAttributes
@@ -25,8 +24,10 @@ class Post
   extends Model<PostAttributes, PostCreationAttributes>
   implements PostAttributes
 {
-  @PrimaryKey
-  @Column
+  @Column({
+    primaryKey: true,
+    defaultValue: UUIDV4,
+  })
   id: number;
   @ForeignKey(() => User)
   @Column
@@ -35,6 +36,10 @@ class Post
   date_posted: Date;
   @Column
   content: string;
+  @Column({
+    defaultValue: 0,
+  })
+  likes: number;
 
   @BelongsTo(() => User)
   author: User;

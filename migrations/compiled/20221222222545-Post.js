@@ -1,5 +1,7 @@
 "use strict";
 
+const { UUIDV4 } = require("sequelize");
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -9,6 +11,7 @@ module.exports = {
         autoIncrement: true,
         type: Sequelize.INTEGER,
         primaryKey: true,
+        defaultValue: UUIDV4,
       },
       date_posted: {
         allowNull: false,
@@ -22,16 +25,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-    });
-  },
-
-  async up(queryInterface, Sequelize) {
-    await queryInterface.addConstraint("Posts", {
-      fields: ["userId"],
-      type: "foreign key",
-      references: {
-        table: "Users",
-        field: "id",
+      likes: {
+        defaultValue: 0,
+        type: Sequelize.INTEGER,
       },
     });
   },
