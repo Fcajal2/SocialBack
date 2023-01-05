@@ -12,4 +12,7 @@ module.exports = {
       },
     });
   },
+  async down(queryInterface, Sequelize) {
+    return queryInterface.removeConstraint("Posts", "posts_ibfk_1");
+  },
 };

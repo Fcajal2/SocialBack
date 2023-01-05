@@ -1,14 +1,9 @@
-import { Optional, UUIDV4 } from "sequelize";
-import {
-  Column,
-  HasMany,
-  Model,
-  Table,
-} from "sequelize-typescript";
+import { Optional, UUID, UUIDV4 } from "sequelize";
+import { Column, HasMany, Model, Table } from "sequelize-typescript";
 import Post from "./Post";
 
 interface UserAttributes {
-  id: number;
+  id: string;
   username: string;
   email: string;
   password: string;
@@ -24,10 +19,11 @@ class User
   implements UserAttributes
 {
   @Column({
+    type: UUID,
     primaryKey: true,
     defaultValue: UUIDV4,
   })
-  id: number;
+  id: string;
   @Column
   username: string;
   @Column

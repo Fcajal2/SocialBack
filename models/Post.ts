@@ -2,6 +2,7 @@ import { Optional, UUIDV4 } from "sequelize";
 import {
   BelongsTo,
   Column,
+  DataType,
   ForeignKey,
   Model,
   Table,
@@ -9,8 +10,8 @@ import {
 import User from "./User";
 
 interface PostAttributes {
-  id: number;
-  user_id: number;
+  id: string;
+  user_id: string;
   content: string;
   likes: number;
 }
@@ -23,13 +24,16 @@ class Post
   implements PostAttributes
 {
   @Column({
+    type: DataType.UUID,
     primaryKey: true,
     defaultValue: UUIDV4,
   })
-  id: number;
+  id: string;
   @ForeignKey(() => User)
-  @Column
-  user_id: number;
+  @Column({
+    type: DataType.UUID,
+  })
+  user_id: string;
   @Column
   content: string;
   @Column({

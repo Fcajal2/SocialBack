@@ -7,11 +7,8 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("Posts", {
       id: {
-        allowNull: false,
-        autoIncrement: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         primaryKey: true,
-        defaultValue: UUIDV4,
       },
       date_posted: {
         allowNull: false,
@@ -23,7 +20,7 @@ module.exports = {
       },
       userId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       likes: {
         defaultValue: 0,
