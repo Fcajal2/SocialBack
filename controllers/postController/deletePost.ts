@@ -5,10 +5,9 @@ const deletePost: RequestHandler = async (req, res) => {
   try {
     const post_id = req.params.id;
     await Post.destroy({ where: { id: post_id } });
-    console.log(`deleted post with id: ${post_id}`);
-    return res.status(200);
+    return res.status(200).json({ res: "Borrado exitosamente" });
   } catch (err) {
-    return res.status(400).json(err);
+    return res.status(400).json(err).json({ res: "No se pudo borrar" });
   }
 };
 

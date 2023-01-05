@@ -18,7 +18,9 @@ interface PostAttributes {
 
 interface PostCreationAttributes extends Optional<PostAttributes, "id"> {}
 
-@Table
+@Table({
+  timestamps: false,
+})
 class Post
   extends Model<PostAttributes, PostCreationAttributes>
   implements PostAttributes

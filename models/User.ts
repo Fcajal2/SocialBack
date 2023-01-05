@@ -13,7 +13,9 @@ interface UserAttributes {
 interface UserCreationAttributes
   extends Optional<UserAttributes, "id" | "image_file"> {}
 
-@Table
+@Table({
+  timestamps: false,
+})
 class User
   extends Model<UserAttributes, UserCreationAttributes>
   implements UserAttributes

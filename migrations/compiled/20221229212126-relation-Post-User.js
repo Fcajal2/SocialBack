@@ -4,7 +4,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.addConstraint("Posts", {
-      fields: ["userId"],
+      fields: ["user_Id"],
       type: "foreign key",
       references: {
         table: "Users",
