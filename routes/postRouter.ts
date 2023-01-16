@@ -5,14 +5,15 @@ import editPost from "../controllers/postController/editPost";
 import getAllPosts from "../controllers/postController/getAllPosts";
 import getPost from "../controllers/postController/getPost";
 import getUserPosts from "../controllers/postController/getUserPosts";
+import checkLogin from "../middlewares/checkLogin";
 
 const postRouter = Router();
 
-postRouter.post("/create", createPost);
-postRouter.put("/:id", editPost);
-postRouter.delete("/:id", deletePost);
+postRouter.post("/create", checkLogin, createPost);
+postRouter.put("/:id", checkLogin, editPost);
+postRouter.delete("/:id", checkLogin, deletePost);
 postRouter.get("/", getAllPosts);
 postRouter.get("/:id", getPost);
-postRouter.get("/:user_id", getUserPosts);
+postRouter.post("/:user_id", getUserPosts);
 
 export default postRouter;

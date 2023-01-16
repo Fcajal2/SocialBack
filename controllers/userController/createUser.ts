@@ -1,22 +1,41 @@
 import { RequestHandler } from "express";
 import User from "../../models/User";
-import UserCreationAttributes from "../../models/User";
 import bcrypt from "bcrypt";
+
+type Body = {
+  username: string;
+  email: string;
+  password: string;
+  repeatPassword: string;
+};
 
 const saltRounds = 10;
 
 const createUser: RequestHandler = async (req, res) => {
   try {
-    const userAttributes = req.body as UserCreationAttributes;
-    
-    bcrypt.genSalt(saltRounds, async function (_err, salt) {
-      bcrypt.hash(userAttributes.password, salt, async function (_err, hash) {
-        userAttributes.password = hash;
-        console.log(userAttributes.password);
-      });
-      const user = await User.create(userAttributes);
-      return res.status(201).json(user)//{ message: "User has been created" });
-    });
+    const userAttributes = req.body as Body;
+    if (userAttributes.password !== userAttributes.repeatPassword) {
+      return res.status(400).json({ message: "Passwords do not match" });
+    }
+
+    const users = User.findAll({ where: { email: userAttributes.email } });
+
+    if (users == null) {
+      bcrypt
+        .hash(userAttributes.password, saltRounds)
+        .then(async function (hash) {
+          await User.create({
+            username: userAttributes.username,
+            email: userAttributes.email,
+            password: hash,
+          });
+          return res.status(201).json({ message: "User has been created" });
+        });
+    } else {
+      return res
+        .status(200)
+        .json({ message: "There's already an account with this email" });
+    }
   } catch (err) {
     return res.status(400).json(err);
   }
