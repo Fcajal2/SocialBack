@@ -9,8 +9,6 @@ type Payload = {
 
 const checkLogin: RequestHandler = async (req, res, next) => {
   try {
-    console.log("headers", req.headers);
-
     if (!req.headers.authorization) {
       throw new Error("Invalid request");
     }

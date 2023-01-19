@@ -14,6 +14,8 @@ interface PostAttributes {
   user_id: string;
   content: string;
   likes: number;
+  reposts: number;
+  commenting: string;
 }
 
 interface PostCreationAttributes extends Optional<PostAttributes, "id"> {}
@@ -42,6 +44,16 @@ class Post
     defaultValue: 0,
   })
   likes: number;
+  @Column({
+    defaultValue: 0,
+  })
+  reposts: number;
+  @ForeignKey(() => Post)
+  @Column({
+    type: DataType.UUID,
+    defaultValue: "",
+  })
+  commenting: string;
 
   @BelongsTo(() => User)
   author: User;

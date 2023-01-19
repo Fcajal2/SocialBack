@@ -1,5 +1,5 @@
 import { Optional, UUID, UUIDV4 } from "sequelize";
-import { Column, HasMany, Model, Table } from "sequelize-typescript";
+import { Column, HasMany, Model, Table, Unique } from "sequelize-typescript";
 import Post from "./Post";
 
 interface UserAttributes {
@@ -28,6 +28,7 @@ class User
   id: string;
   @Column
   username: string;
+  @Unique
   @Column
   email: string;
   @Column
