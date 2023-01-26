@@ -5,7 +5,7 @@ import PostCreationAttributes from "../../models/Post";
 const createPost: RequestHandler = async (req, res) => {
   try {
     let postAttributes = req.body as PostCreationAttributes;
-    postAttributes.commenting = "";
+    //postAttributes.commenting = "";
     const post = await Post.create(postAttributes);
     return res.status(201).json(post);
   } catch (err) {

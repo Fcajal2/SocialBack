@@ -4,6 +4,7 @@ import {
   Column,
   DataType,
   ForeignKey,
+  // HasMany,
   Model,
   Table,
 } from "sequelize-typescript";
@@ -15,7 +16,7 @@ interface PostAttributes {
   content: string;
   likes: number;
   reposts: number;
-  commenting: string;
+  //commenting: string;
 }
 
 interface PostCreationAttributes extends Optional<PostAttributes, "id"> {}
@@ -33,6 +34,10 @@ class Post
     defaultValue: UUIDV4,
   })
   id: string;
+  @Column({
+    type: DataType.DATE,
+  })
+  date_posted: Date;
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
@@ -48,15 +53,19 @@ class Post
     defaultValue: 0,
   })
   reposts: number;
-  @ForeignKey(() => Post)
-  @Column({
-    type: DataType.UUID,
-    defaultValue: "",
-  })
-  commenting: string;
+  //@ForeignKey(() => Post)
+  //@Column({
+  //  type: DataType.UUID,
+  //  defaultValue: " ",
+  //})
+  //commenting: string;
 
   @BelongsTo(() => User)
   author: User;
+  // @BelongsTo(() => Post)
+  // replying: Post;
+  // @HasMany(() => Post)
+  // comments: Post;
 }
 
 export default Post;
