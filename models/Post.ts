@@ -4,10 +4,12 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   // HasMany,
   Model,
   Table,
 } from "sequelize-typescript";
+import Like from "./Like";
 import User from "./User";
 
 interface PostAttributes {
@@ -62,6 +64,11 @@ class Post
 
   @BelongsTo(() => User)
   author: User;
+  @HasMany(() => Like)
+  likers: Like[];
+  
+  
+  
   // @BelongsTo(() => Post)
   // replying: Post;
   // @HasMany(() => Post)

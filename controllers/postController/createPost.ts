@@ -2,6 +2,8 @@ import { RequestHandler } from "express";
 import Post from "../../models/Post";
 import PostCreationAttributes from "../../models/Post";
 
+
+
 const createPost: RequestHandler = async (req, res) => {
   try {
     let postAttributes = req.body as PostCreationAttributes;

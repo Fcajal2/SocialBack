@@ -9,8 +9,8 @@ import {
 import User from "./User";
 
 interface FollowAttributes {
-  user_id: string;
-  follow_id: string;
+  follower_id: string;
+  followed_id: string;
 }
 
 @Table({
@@ -21,16 +21,18 @@ class Follow extends Model<FollowAttributes> implements FollowAttributes {
   @Column({
     type: DataType.UUID,
   })
-  user_id: string;
+  follower_id: string;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
   })
-  follow_id: string;
+  followed_id: string;
 
   @BelongsTo(() => User)
-  author: User;
+  follower: User;
+  @BelongsTo(() => User)
+  followed: User;
 }
 
 export default Follow;

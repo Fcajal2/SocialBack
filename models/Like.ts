@@ -32,6 +32,8 @@ class Like extends Model<LikeAttributes> implements LikeAttributes {
 
   @BelongsTo(() => User)
   author: User;
+  @BelongsTo(()=> Post)
+  post: Post;
 }
 
 export default Like;

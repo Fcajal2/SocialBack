@@ -16,7 +16,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      user_Id: {
+      user_id: {
         allowNull: false,
         type: Sequelize.STRING,
       },
@@ -34,7 +34,7 @@ module.exports = {
       //  allowNull: false,
       //  defaultValue: " ",
       //  type: Sequelize.STRING,
-     // },
+      // },
     });
   },
 

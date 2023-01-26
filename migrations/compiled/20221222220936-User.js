@@ -24,6 +24,16 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+      followers: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
+      following: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
     });
   },
   async down(queryInterface, Sequelize) {

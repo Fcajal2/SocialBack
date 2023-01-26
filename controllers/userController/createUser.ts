@@ -14,9 +14,6 @@ const saltRounds = 10;
 const createUser: RequestHandler = async (req, res) => {
   try {
     const userAttributes = req.body as Body;
-    if (userAttributes.password !== userAttributes.repeatPassword) {
-      return res.status(400).json({ message: "Passwords do not match" });
-    }
 
     const users = await User.findOne({
       where: { email: userAttributes.email },
