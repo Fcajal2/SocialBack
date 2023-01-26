@@ -9,6 +9,7 @@ module.exports = {
         type: Sequelize.Integer,
       }),
       queryInterface.addColumn("Posts", "commenting", {
+        defaultValue: " ",
         allowNUll: false,
         type: Sequelize.STRING,
       }),

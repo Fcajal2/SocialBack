@@ -18,9 +18,11 @@ const createUser: RequestHandler = async (req, res) => {
       return res.status(400).json({ message: "Passwords do not match" });
     }
 
-    const users = User.findAll({ where: { email: userAttributes.email } });
+    const users = await User.findOne({
+      where: { email: userAttributes.email },
+    });
 
-    if (users == null) {
+    if (users === null) {
       bcrypt
         .hash(userAttributes.password, saltRounds)
         .then(async function (hash) {
