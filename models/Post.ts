@@ -24,7 +24,8 @@ interface PostAttributes {
 interface PostCreationAttributes extends Optional<PostAttributes, "id"> {}
 
 @Table({
-  timestamps: false,
+  timestamps: true,
+  deletedAt: false,
 })
 class Post
   extends Model<PostAttributes, PostCreationAttributes>
@@ -36,25 +37,26 @@ class Post
     defaultValue: UUIDV4,
   })
   id: string;
-  @Column({
-    type: DataType.DATE,
-  })
-  date_posted: Date;
+
+  @Column
+  content: string;
+
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
   })
   user_id: string;
-  @Column
-  content: string;
+
   @Column({
     defaultValue: 0,
   })
   likes: number;
+
   @Column({
     defaultValue: 0,
   })
   reposts: number;
+
   //@ForeignKey(() => Post)
   //@Column({
   //  type: DataType.UUID,
@@ -66,9 +68,7 @@ class Post
   author: User;
   @HasMany(() => Like)
   likers: Like[];
-  
-  
-  
+
   // @BelongsTo(() => Post)
   // replying: Post;
   // @HasMany(() => Post)

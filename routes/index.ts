@@ -7,6 +7,6 @@ const appRouter = Router();
 
 appRouter.use("/user", userRouter);
 appRouter.use("/post", postRouter);
-appRouter.use("/myProfile", meRouter)
+appRouter.use("/myProfile", meRouter);
 
 export default appRouter;

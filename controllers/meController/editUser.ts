@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import User from "../../models/User";
 
 const editUser: RequestHandler = async (req, res) => {
-  const User_id = req.params.id;
+  const User_id = res.locals.user.id;
   const UserAttributes = req.body;
   const response = await User.update(UserAttributes, {
     where: { id: User_id },

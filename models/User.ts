@@ -12,16 +12,17 @@ interface UserAttributes {
   image_file: string;
   followers: number;
   following: number;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-interface UserCreationAttributes
-  extends Optional<
-    UserAttributes,
-    "id" | "image_file" | "followers" | "following"
-  > {}
+interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
 
 @Table({
-  timestamps: false,
+  timestamps: true,
+  createdAt: true,
+  deletedAt: false,
+  updatedAt: true,
 })
 class User
   extends Model<UserAttributes, UserCreationAttributes>
@@ -33,19 +34,33 @@ class User
     defaultValue: UUIDV4,
   })
   id: string;
+
+  @Column
+  createdAt: Date;
+
+  @Column
+  updatedAt: Date;
+
   @Column
   username: string;
+
   @Unique
   @Column
   email: string;
+
   @Column
   password: string;
-  @Column
+
+  @Column({
+    defaultValue: "default.png",
+  })
   image_file: string;
+
   @Column({
     defaultValue: 0,
   })
   followers: number;
+
   @Column({
     defaultValue: 0,
   })

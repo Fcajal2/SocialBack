@@ -11,5 +11,6 @@ app.use("/api", appRouter);
 
 app.listen(3000, async () => {
   await sequelize.authenticate();
+  await sequelize.sync();
   console.log("DB connected and app listen");
 });

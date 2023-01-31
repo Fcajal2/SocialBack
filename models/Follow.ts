@@ -4,6 +4,7 @@ import {
   DataType,
   ForeignKey,
   Model,
+  PrimaryKey,
   Table,
 } from "sequelize-typescript";
 import User from "./User";
@@ -14,9 +15,16 @@ interface FollowAttributes {
 }
 
 @Table({
-  timestamps: false,
+  timestamps: true,
+  createdAt: "followedAt",
+  deletedAt: false,
+  updatedAt: false,
 })
 class Follow extends Model<FollowAttributes> implements FollowAttributes {
+  @PrimaryKey
+  @Column
+  followedAt: Date;
+
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,

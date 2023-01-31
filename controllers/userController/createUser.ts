@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { RequestHandler } from "express";
 import User from "../../models/User";
 import bcrypt from "bcrypt";

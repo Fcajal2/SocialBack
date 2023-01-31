@@ -4,6 +4,7 @@ import {
   DataType,
   ForeignKey,
   Model,
+  PrimaryKey,
   Table,
 } from "sequelize-typescript";
 import Post from "./Post";
@@ -15,9 +16,16 @@ interface LikeAttributes {
 }
 
 @Table({
-  timestamps: false,
+  timestamps: true,
+  createdAt: "likedAt",
+  deletedAt: false,
+  updatedAt: false,
 })
 class Like extends Model<LikeAttributes> implements LikeAttributes {
+  @PrimaryKey
+  @Column
+  likedAt: Date;
+
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
@@ -32,7 +40,7 @@ class Like extends Model<LikeAttributes> implements LikeAttributes {
 
   @BelongsTo(() => User)
   author: User;
-  @BelongsTo(()=> Post)
+  @BelongsTo(() => Post)
   post: Post;
 }
 
