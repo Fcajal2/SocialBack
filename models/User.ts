@@ -10,8 +10,6 @@ interface UserAttributes {
   email: string;
   password: string;
   image_file: string;
-  followers: number;
-  following: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -36,12 +34,6 @@ class User
   id: string;
 
   @Column
-  createdAt: Date;
-
-  @Column
-  updatedAt: Date;
-
-  @Column
   username: string;
 
   @Unique
@@ -56,22 +48,18 @@ class User
   })
   image_file: string;
 
-  @Column({
-    defaultValue: 0,
-  })
-  followers: number;
+  @Column
+  createdAt: Date;
 
-  @Column({
-    defaultValue: 0,
-  })
-  following: number;
+  @Column
+  updatedAt: Date;
 
   @HasMany(() => Post)
   writtenPosts: Post[];
   @HasMany(() => Like)
   liked: Like[];
   @HasMany(() => Follow)
-  follower: Follow[];
+  followers: Follow[];
   @HasMany(() => Follow)
   followeds: Follow[];
 }

@@ -1,14 +1,16 @@
 import { Sequelize, SequelizeOptions } from "sequelize-typescript";
-import config from "../config/config.json";
-import User from "./User";
-import Post from "./Post";
-import Like from "./Like";
-import Follow from "./Follow";
+import config from "../config/config";
+import User from "../models/User";
+import Post from "../models/Post";
+import Like from "../models/Like";
+import Follow from "../models/Follow";
+
+const local = config.local;
 
 const sequelize = new Sequelize(
-  config.local.database,
-  config.local.username,
-  config.local.password,
+  local.database ?? "",
+  local.username ?? "",
+  local.password ?? "",
   {
     host: config.local.host,
     dialect: config.local.dialect ?? "mysql",

@@ -22,6 +22,7 @@ interface LikeAttributes {
   updatedAt: false,
 })
 class Like extends Model<LikeAttributes> implements LikeAttributes {
+  
   @PrimaryKey
   @Column
   likedAt: Date;

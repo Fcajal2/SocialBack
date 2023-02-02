@@ -18,7 +18,8 @@ interface PostAttributes {
   content: string;
   likes: number;
   reposts: number;
-  //commenting: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 interface PostCreationAttributes extends Optional<PostAttributes, "id"> {}
@@ -38,14 +39,14 @@ class Post
   })
   id: string;
 
-  @Column
-  content: string;
-
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
   })
   user_id: string;
+
+  @Column
+  content: string;
 
   @Column({
     defaultValue: 0,
@@ -57,22 +58,16 @@ class Post
   })
   reposts: number;
 
-  //@ForeignKey(() => Post)
-  //@Column({
-  //  type: DataType.UUID,
-  //  defaultValue: " ",
-  //})
-  //commenting: string;
+  @Column
+  createdAt: Date;
+
+  @Column
+  updatedAt: Date;
 
   @BelongsTo(() => User)
   author: User;
   @HasMany(() => Like)
   likers: Like[];
-
-  // @BelongsTo(() => Post)
-  // replying: Post;
-  // @HasMany(() => Post)
-  // comments: Post;
 }
 
 export default Post;

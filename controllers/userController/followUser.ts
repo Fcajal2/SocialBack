@@ -13,13 +13,9 @@ const followUser: RequestHandler = async (req, res) => {
       });
 
       if (relation === null) {
-        user.following++;
-        follow.followers++;
-        await Follow.create({ follower_id: user, followed_id: follow.id });
+        await Follow.create({ follower_id: user.id, followed_id: follow.id });
         return res.status(201).json({ message: "Followed" });
       } else {
-        user.following--;
-        follow.followers--;
         await Follow.destroy({
           where: { followed_id: user.id, follower_id: follow.id },
         });
