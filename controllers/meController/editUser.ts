@@ -3,7 +3,10 @@ import User from "../../models/User";
 
 const editUser: RequestHandler = async (req, res) => {
   const User_id = res.locals.user.id;
+
   const UserAttributes = req.body;
+  UserAttributes.image_file = req.file;
+
   const response = await User.update(UserAttributes, {
     where: { id: User_id },
   });
