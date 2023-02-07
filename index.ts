@@ -8,6 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api", appRouter);
+app.use("/public", express.static(`${__dirname}/public`));
 
 app.listen(3000, async () => {
   await sequelize.authenticate();

@@ -16,25 +16,29 @@ const createUser: RequestHandler = async (req, res) => {
   try {
     const userAttributes = req.body as Body;
 
-    const users = await User.findOne({
-      where: { email: userAttributes.email },
-    });
-
-    if (users === null) {
-      bcrypt
-        .hash(userAttributes.password, saltRounds)
-        .then(async function (hash) {
-          await User.create({
-            username: userAttributes.username,
-            email: userAttributes.email,
-            password: hash,
-          });
-          return res.status(201).json({ message: "User has been created" });
-        });
+    if (userAttributes.password !== userAttributes.repeatPassword) {
+      return res.status(200).json({ message: "Passwords do not match" });
     } else {
-      return res
-        .status(200)
-        .json({ message: "There's already an account with this email" });
+      const users = await User.findOne({
+        where: { email: userAttributes.email },
+      });
+
+      if (users === null) {
+        bcrypt
+          .hash(userAttributes.password, saltRounds)
+          .then(async function (hash) {
+            await User.create({
+              username: userAttributes.username,
+              email: userAttributes.email,
+              password: hash,
+            });
+            return res.status(201).json({ message: "User has been created" });
+          });
+      } else {
+        return res
+          .status(200)
+          .json({ message: "There's already an account with this email" });
+      }
     }
   } catch (err) {
     return res.status(400).json(err);

@@ -1,28 +1,28 @@
 import { RequestHandler } from "express";
-import Like from "../../models/Like";
+import Repost from "../../models/Repost";
 import Post from "../../models/Post";
 
-const likePost: RequestHandler = async (req, res) => {
+const repostPost: RequestHandler = async (req, res) => {
   const user = res.locals.user;
   const post = await Post.findByPk(req.params.id);
 
   if (post) {
-    let relation = await Like.findOne({
+    let relation = await Repost.findOne({
       where: { user_id: user.id, post_id: post.id },
     });
 
     if (relation === null) {
-      await Like.create({ user_id: user.id, post_id: post.id });
-      return res.status(201).json({ message: "Liked" });
+      await Repost.create({ user_id: user.id, post_id: post.id });
+      return res.status(201).json({ message: "Reposted" });
     } else {
-      await Like.destroy({
+      await Repost.destroy({
         where: { user_id: user.id, post_id: post.id },
       });
-      return res.status(201).json({ message: "Unliked" });
+      return res.status(201).json({ message: "Unreposted" });
     }
   } else {
     return res.status(404).json({ message: "Post does not exist" });
   }
 };
 
-export default likePost;
+export default repostPost;

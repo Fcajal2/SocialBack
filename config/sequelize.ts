@@ -4,6 +4,7 @@ import User from "../models/User";
 import Post from "../models/Post";
 import Like from "../models/Like";
 import Follow from "../models/Follow";
+import Repost from "../models/Repost";
 
 const local = config.local;
 
@@ -15,7 +16,7 @@ const sequelize = new Sequelize(
     host: config.local.host,
     dialect: config.local.dialect ?? "mysql",
     port: config.local.port,
-    models: [Post, User, Like, Follow],
+    models: [Post, User, Like, Follow, Repost],
   } as SequelizeOptions
 );
 

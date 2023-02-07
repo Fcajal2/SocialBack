@@ -16,8 +16,6 @@ interface PostAttributes {
   id: string;
   user_id: string;
   content: string;
-  likes: number;
-  reposts: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -47,16 +45,6 @@ class Post
 
   @Column
   content: string;
-
-  @Column({
-    defaultValue: 0,
-  })
-  likes: number;
-
-  @Column({
-    defaultValue: 0,
-  })
-  reposts: number;
 
   @Column
   createdAt: Date;

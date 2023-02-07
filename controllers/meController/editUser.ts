@@ -5,7 +5,9 @@ const editUser: RequestHandler = async (req, res) => {
   const User_id = res.locals.user.id;
 
   const UserAttributes = req.body;
-  UserAttributes.image_file = req.file;
+  if (req.file) {
+    UserAttributes.image_file = req.file.filename;
+  }
 
   const response = await User.update(UserAttributes, {
     where: { id: User_id },
