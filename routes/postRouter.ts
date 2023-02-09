@@ -1,3 +1,4 @@
+import getFollowedPosts from "../controllers/postController/getFollowedPosts";
 import { Router } from "express";
 import createPost from "../controllers/postController/createPost";
 import deletePost from "../controllers/postController/deletePost";
@@ -14,6 +15,7 @@ postRouter.post("/create", checkLogin, createPost);
 postRouter.delete("/:id", checkLogin, deletePost);
 postRouter.put("/:id", checkLogin, editPost);
 postRouter.get("/", getAllPosts);
+postRouter.get("/follows", checkLogin, getFollowedPosts);
 postRouter.get("/:id", getPost);
 postRouter.post("/:id/like", checkLogin, likePost);
 postRouter.post("/:id/repost", checkLogin, repostPost);

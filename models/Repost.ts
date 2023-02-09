@@ -1,4 +1,5 @@
 import {
+  AllowNull,
   BelongsTo,
   Column,
   DataType,
@@ -27,6 +28,7 @@ class Repost extends Model<RepostAttributes> implements RepostAttributes {
   repostedAt: Date;
 
   @ForeignKey(() => User)
+  @AllowNull
   @Column({
     type: DataType.UUID,
   })

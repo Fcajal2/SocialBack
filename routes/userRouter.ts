@@ -20,7 +20,7 @@ userRouter.post("/:id/follow", checkLogin, followUser);
 userRouter.get("/:id/followers", getFollowers);
 userRouter.get("/:id/followings", getFollowings);
 userRouter.get("/:id", getUserInfo);
-userRouter.get("/:id/posts", getUserPosts)
+userRouter.get("/:user_id/posts", getUserPosts);
 userRouter.post("/login", loginUser);
 
 export default userRouter;

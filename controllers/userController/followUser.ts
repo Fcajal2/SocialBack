@@ -5,7 +5,11 @@ import User from "../../models/User";
 const followUser: RequestHandler = async (req, res) => {
   try {
     const user = res.locals.user;
-    const follow = await User.findByPk(req.params.id);
+    const follow = await User.findByPk(req.params.id, {
+      attributes: {
+        exclude: ["username", "email", "password", "image_file", "createdAt"],
+      },
+    });
 
     if (follow) {
       let relation = await Follow.findOne({
