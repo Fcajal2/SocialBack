@@ -15,12 +15,7 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "paths": {
-      "config/*": ["./config/*"],
-      "models/*": ["./models/*"],
-      "routes/*": ["./routes/*"],
-      "controllers/*": ["./controllers/*"],
-      "seeders/*": ["./seeders/*"],
-      "utils/*": ["./utils/*"]
+      "config/*": ["./config/*"]
     }
   }
 }
