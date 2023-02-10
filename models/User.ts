@@ -11,7 +11,6 @@ interface UserAttributes {
   password: string;
   image_file: string;
   createdAt: Date;
-  updatedAt: Date;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
@@ -20,7 +19,7 @@ interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
   timestamps: true,
   createdAt: true,
   deletedAt: false,
-  updatedAt: true,
+  updatedAt: false,
 })
 class User
   extends Model<UserAttributes, UserCreationAttributes>
@@ -50,9 +49,6 @@ class User
 
   @Column
   createdAt: Date;
-
-  @Column
-  updatedAt: Date;
 
   @HasMany(() => Post)
   writtenPosts: Post[];

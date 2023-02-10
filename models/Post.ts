@@ -17,7 +17,6 @@ interface PostAttributes {
   user_id: string;
   content: string;
   createdAt: Date;
-  updatedAt: Date;
 }
 
 interface PostCreationAttributes extends Optional<PostAttributes, "id"> {}
@@ -25,6 +24,7 @@ interface PostCreationAttributes extends Optional<PostAttributes, "id"> {}
 @Table({
   timestamps: true,
   deletedAt: false,
+  updatedAt: false,
 })
 class Post
   extends Model<PostAttributes, PostCreationAttributes>
@@ -48,9 +48,6 @@ class Post
 
   @Column
   createdAt: Date;
-
-  @Column
-  updatedAt: Date;
 
   @BelongsTo(() => User)
   author: User;

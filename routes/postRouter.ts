@@ -1,21 +1,23 @@
+import getFollowedPosts from "../controllers/postController/getFollowedPosts";
 import { Router } from "express";
 import createPost from "../controllers/postController/createPost";
 import deletePost from "../controllers/postController/deletePost";
 import editPost from "../controllers/postController/editPost";
 import getAllPosts from "../controllers/postController/getAllPosts";
 import getPost from "../controllers/postController/getPost";
-import getUserPosts from "../controllers/postController/getUserPosts";
 import likePost from "../controllers/postController/likePost";
+import repostPost from "../controllers/postController/repostPost";
 import checkLogin from "../middlewares/checkLogin";
 
 const postRouter = Router();
 
 postRouter.post("/create", checkLogin, createPost);
-postRouter.put("/:id", checkLogin, editPost);
 postRouter.delete("/:id", checkLogin, deletePost);
+postRouter.put("/:id", checkLogin, editPost);
 postRouter.get("/", getAllPosts);
+postRouter.get("/follows", checkLogin, getFollowedPosts);
 postRouter.get("/:id", getPost);
-postRouter.post("/:user_id", getUserPosts);
 postRouter.post("/:id/like", checkLogin, likePost);
+postRouter.post("/:id/repost", checkLogin, repostPost);
 
 export default postRouter;
