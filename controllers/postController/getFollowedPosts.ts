@@ -17,6 +17,7 @@ const getFollowedPosts: RequestHandler = async (req, res) => {
 
     //Posts reposted by the user, includes basic info of author
     const reposts = await Repost.findAll({
+      order: [["repostedAt", "DESC"]],
       where: { user_id: user_id },
       include: [
         {
@@ -27,17 +28,16 @@ const getFollowedPosts: RequestHandler = async (req, res) => {
         },
         {
           model: Post,
-          order: [["createdAt", "DESC"]],
           attributes: {
             exclude: ["user_id", "updatedAt"],
           },
         },
       ],
-      attributes: { exclude: ["repostedAt", "user_id", "post_id"] },
+      attributes: { exclude: ["user_id", "post_id"] },
     });
 
     //Posts made by other users that the current wild
-    /* const follows = await Follow.findAll({
+    const follows = await Follow.findAll({
       where: { follower_id: user_id },
       include: [
         {
@@ -69,10 +69,11 @@ const getFollowedPosts: RequestHandler = async (req, res) => {
               },
             },
           ],
-        },
+        }, */
       ],
-    });*/
-    const response = { posts, /* follows */ reposts };
+    });
+
+    const response = { posts, follows, reposts };
     return res.status(200).json(response);
   } catch (err) {
     return res.status(400).json(err);

@@ -12,12 +12,12 @@ import checkLogin from "../middlewares/checkLogin";
 const postRouter = Router();
 
 postRouter.post("/create", checkLogin, createPost);
-postRouter.delete("/:id", checkLogin, deletePost);
-postRouter.put("/:id", checkLogin, editPost);
-postRouter.get("/", getAllPosts);
+postRouter.delete("/:post_id", checkLogin, deletePost);
+postRouter.put("/:post_id", checkLogin, editPost);
+postRouter.get("/all", getAllPosts);
 postRouter.get("/follows", checkLogin, getFollowedPosts);
-postRouter.get("/:id", getPost);
-postRouter.post("/:id/like", checkLogin, likePost);
-postRouter.post("/:id/repost", checkLogin, repostPost);
+postRouter.get("/:post_id", getPost);
+postRouter.post("/:post_id/like", checkLogin, likePost);
+postRouter.post("/:post_id/repost", checkLogin, repostPost);
 
 export default postRouter;
