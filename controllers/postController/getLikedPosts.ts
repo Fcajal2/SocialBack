@@ -3,7 +3,7 @@ import User from "../../models/User";
 import Post from "../../models/Post";
 import Like from "../../models/Like";
 
-const getFollowedPosts: RequestHandler = async (req, res) => {
+const getLikedPosts: RequestHandler = async (req, res) => {
   try {
     const user_id = req.params.user_id;
 
@@ -35,4 +35,4 @@ const getFollowedPosts: RequestHandler = async (req, res) => {
   }
 };
 
-export default getFollowedPosts;
+export default getLikedPosts;
