@@ -17,7 +17,7 @@ const createUser: RequestHandler = async (req, res) => {
     const userAttributes = req.body as Body;
 
     if (userAttributes.password !== userAttributes.repeatPassword) {
-      return res.status(200).json({ message: "Passwords do not match" });
+      throw new Error("Passwords do not match");
     } else {
       const users = await User.findOne({
         where: { email: userAttributes.email },
@@ -34,14 +34,11 @@ const createUser: RequestHandler = async (req, res) => {
             });
             return res.status(201).json({ message: "User has been created" });
           });
-      } else {
-        return res
-          .status(200)
-          .json({ message: "There's already an account with this email" });
-      }
+      } else throw new Error("There's already an account with this email");
     }
-  } catch (err) {
-    return res.status(400).json(err);
+  } catch (err: any) {
+    res.statusMessage = err.message;
+    res.status(400).json(err);
   }
 };
 

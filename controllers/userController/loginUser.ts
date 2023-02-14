@@ -10,27 +10,36 @@ type Login = {
 
 const loginUser: RequestHandler = async (req, res) => {
   const check = req.body as Login;
-  const user = await User.findOne({
-    where: { email: check.email },
-  });
-  if (user != null) {
-    const isSame = bcrypt.compareSync(check.password, user.password);
-    if (isSame) {
-      const payload = {
-        email: user.email,
-        id: user.id,
-      };
-      const token = jwt.sign(payload, "secd21din12oi1");
-      return res.status(200).json({
-        payload: {
-          token,
-        },
-      });
+  console.log(req.body);
+
+  try {
+    if (!check.email || !check.password)
+      throw new Error("A valid email and password must be provided");
+    const user = await User.findOne({
+      where: { email: check.email },
+    });
+    if (user != null) {
+      const isSame = bcrypt.compareSync(check.password, user.password);
+      if (isSame) {
+        const payload = {
+          email: user.email,
+          id: user.id,
+        };
+        const token = jwt.sign(payload, "secd21din12oi1");
+        return res.status(200).json({
+          payload: {
+            token,
+          },
+        });
+      } else {
+        throw new Error("Incorrect email or password");
+      }
     } else {
-      return res.status(400).json({ message: "Incorrect email or password" });
+      throw new Error("Incorrect email or password");
     }
-  } else {
-    return res.status(400).json({ message: "Incorrect email or password" });
+  } catch (error: any) {
+    res.statusMessage = error.message;
+    res.status(400).json({ message: error.message });
   }
 };
 
