@@ -1,5 +1,5 @@
 import { Router } from "express";
-import checkLogin from "middlewares/checkLogin";
+import checkLogin from "../middlewares/checkLogin";
 import postRouter from "./postRouter";
 import userRouter from "./userRouter";
 
