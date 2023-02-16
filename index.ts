@@ -12,6 +12,6 @@ app.get("/", express.static(`${__dirname}/public`));
 
 app.listen(3000, async () => {
   await sequelize.authenticate();
-  await sequelize.sync();
+  await sequelize.sync({ alter: true });
   console.log("DB connected and app listen");
 });
