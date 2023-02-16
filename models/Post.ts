@@ -5,7 +5,6 @@ import {
   DataType,
   ForeignKey,
   HasMany,
-  // HasMany,
   Model,
   Table,
 } from "sequelize-typescript";
@@ -16,6 +15,7 @@ interface PostAttributes {
   id: string;
   user_id: string;
   content: string;
+  image_file: string;
   createdAt: Date;
 }
 
@@ -45,6 +45,11 @@ class Post
 
   @Column
   content: string;
+
+  @Column({
+    allowNull: true,
+  })
+  image_file: string;
 
   @Column
   createdAt: Date;

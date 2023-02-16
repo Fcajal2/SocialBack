@@ -11,6 +11,9 @@ declare global {
       DB_HOST: string;
       DB_DIALECT: Dialect;
       DB_PORT: number;
+      AWS_region: string;
+      AWS_id: string;
+      AWS_secret: string;
     }
   }
 }
