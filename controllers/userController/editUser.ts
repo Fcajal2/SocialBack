@@ -6,12 +6,16 @@ const editUser: RequestHandler = async (req, res) => {
 
   const UserAttributes = req.body;
   if (req.file) {
-    UserAttributes.image_file = req.file.filename;
+    //@ts-ignore
+    UserAttributes.image_file = req.file.key;
   }
 
+  console.log(req.file);
+  console.log(UserAttributes);
   const response = await User.update(UserAttributes, {
     where: { id: id },
   });
+  console.log(response);
   if (response[0] == 1) {
     return res.status(200).json({ res: "Modificacion exitosa" });
   } else
