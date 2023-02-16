@@ -34,13 +34,11 @@ const createUser: RequestHandler = async (req, res) => {
             });
             return res.status(201).json({ message: "User has been created" });
           });
-      } else {
-        throw new Error("There's already an account with this email");
-      }
+      } else throw new Error("There's already an account with this email");
     }
-  } catch (err) {
+  } catch (err: any) {
     res.statusMessage = err.message;
-    return res.status(400).json(err);
+    res.status(400).json(err);
   }
 };
 

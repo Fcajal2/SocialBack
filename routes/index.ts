@@ -7,6 +7,6 @@ const appRouter = Router();
 
 appRouter.use("/user", userRouter);
 appRouter.use("/post", postRouter);
-appRouter.post("/validatejwt", checkLogin)
+appRouter.post("/validatejwt", checkLogin);
 
 export default appRouter;
