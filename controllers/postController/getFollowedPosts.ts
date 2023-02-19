@@ -7,7 +7,6 @@ import Repost from "../../models/Repost";
 const getFollowedPosts: RequestHandler = async (req, res) => {
   try {
     const user_id = res.locals.user.id;
-    //const user_id = req.params.user_id;
 
     //Posts made by the author
     const posts = await Post.findAll({
@@ -76,7 +75,10 @@ const getFollowedPosts: RequestHandler = async (req, res) => {
     const response = { posts, follows, reposts };
     return res.status(200).json(response);
   } catch (err) {
-    return res.status(400).json(err);
+    return res
+      .status(400)
+      .json(err)
+      .json({ res: "No se obtuvieron los posts" });
   }
 };
 

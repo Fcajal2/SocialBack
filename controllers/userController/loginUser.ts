@@ -9,10 +9,8 @@ type Login = {
 };
 
 const loginUser: RequestHandler = async (req, res) => {
-  const check = req.body as Login;
-  console.log(req.body);
-
   try {
+    const check = req.body as Login;
     if (!check.email || !check.password)
       throw new Error("A valid email and password must be provided");
     const user = await User.findOne({

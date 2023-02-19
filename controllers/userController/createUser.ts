@@ -24,6 +24,7 @@ const createUser: RequestHandler = async (req, res) => {
       });
 
       if (users === null) {
+        
         bcrypt
           .hash(userAttributes.password, saltRounds)
           .then(async function (hash) {

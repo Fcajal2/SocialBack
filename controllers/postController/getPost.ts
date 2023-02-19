@@ -6,7 +6,7 @@ import User from "../../models/User";
 
 const getPost: RequestHandler = async (req, res) => {
   try {
-    const post_id = req.params.id;
+    const post_id = req.params.post_id;
     const post = await Post.findByPk(post_id, {
       include: [
         {
@@ -26,7 +26,7 @@ const getPost: RequestHandler = async (req, res) => {
 
     return res.status(200).json(response);
   } catch (err) {
-    return res.status(400).json(err);
+    return res.status(400).json(err).json({ res: "No se obtuvo el post" });
   }
 };
 

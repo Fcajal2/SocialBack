@@ -31,7 +31,7 @@ const getLikedPosts: RequestHandler = async (req, res) => {
 
     return res.status(200).json(likes);
   } catch (err) {
-    return res.status(400).json(err);
+    return res.status(400).json(err).json({ res: "No se obtuvieron los likes(posts)" });;
   }
 };
 

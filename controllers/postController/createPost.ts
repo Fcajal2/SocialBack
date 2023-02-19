@@ -16,8 +16,7 @@ const createPost: RequestHandler = async (req, res) => {
     return res.status(201).json({ res: "Post creado exitosamente" });
   } catch (err) {
     console.log(err);
-
-    return res.status(400).json(err);
+    return res.status(400).json(err).json({ res: "No se pudo crear" });
   }
 };
 

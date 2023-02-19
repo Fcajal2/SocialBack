@@ -4,7 +4,7 @@ import User from "../../models/User";
 
 const getFollowings: RequestHandler = async (req, res) => {
   try {
-    const info = await User.findByPk(req.params.id, {
+    const info = await User.findByPk(req.params.user_id, {
       attributes: { exclude: ["password"] },
     });
     if (!info) {
