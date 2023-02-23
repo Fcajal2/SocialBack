@@ -17,7 +17,7 @@ const getFollowedPosts: RequestHandler = async (req, res) => {
     //Posts reposted by the user, includes basic info of author
     const reposts = await Repost.findAll({
       order: [["repostedAt", "DESC"]],
-      where: { user_id: user_id },
+      where: { reposter_id: user_id },
       include: [
         {
           model: User,

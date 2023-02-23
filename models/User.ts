@@ -3,6 +3,7 @@ import { Column, HasMany, Model, Table, Unique } from "sequelize-typescript";
 import Follow from "./Follow";
 import Like from "./Like";
 import Post from "./Post";
+import Repost from "./Repost";
 
 interface UserAttributes {
   id: string;
@@ -35,7 +36,6 @@ class User
   @Column
   username: string;
 
-  @Unique
   @Column
   email: string;
 
@@ -54,6 +54,8 @@ class User
   writtenPosts: Post[];
   @HasMany(() => Like)
   liked: Like[];
+  @HasMany(() => Repost)
+  reposts: Repost[];
   @HasMany(() => Follow)
   followers: Follow[];
   @HasMany(() => Follow)

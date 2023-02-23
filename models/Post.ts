@@ -9,6 +9,7 @@ import {
   Table,
 } from "sequelize-typescript";
 import Like from "./Like";
+import Repost from "./Repost";
 import User from "./User";
 
 interface PostAttributes {
@@ -58,6 +59,8 @@ class Post
   author: User;
   @HasMany(() => Like)
   likers: Like[];
+  @HasMany(()=> Repost)
+  reposts: Repost[];
 }
 
 export default Post;

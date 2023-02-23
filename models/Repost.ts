@@ -12,7 +12,7 @@ import Post from "./Post";
 import User from "./User";
 
 interface RepostAttributes {
-  user_id: string;
+  reposter_id: string;
   post_id: string;
 }
 
@@ -32,7 +32,7 @@ class Repost extends Model<RepostAttributes> implements RepostAttributes {
   @Column({
     type: DataType.UUID,
   })
-  user_id: string;
+  reposter_id: string;
 
   @ForeignKey(() => Post)
   @Column({
